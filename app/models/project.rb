@@ -12,10 +12,18 @@ class Project < ActiveRecord::Base
   validates :owner_id, presence: true
 
   validate :check_start_date
+  validate :check_end_date
 
   def check_start_date
     if start_date < Date.today
-      errors.add(:start_date, "Start date must be in future")
+      errors.add(:start_date, "-----> Start date must be in future")
     end
   end
+
+  def check_end_date
+    if end_date < start_date
+      errors.add(:end_date, "----> End date must be after project start date")
+    end
+  end
+
 end
