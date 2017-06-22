@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @pledges = Pledges.where(project_id: params[:id])
+    @pledges = Pledge.where(project_id: params[:id])
   end
 
   def new
@@ -19,7 +19,9 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
 
-    if @project.save
+    @project.owner_id = 1
+
+    if @project.save!
       redirect_to projects_url
     else
       render :new

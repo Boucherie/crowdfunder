@@ -9,5 +9,13 @@ class Project < ActiveRecord::Base
 
   validates :goal, numericality: { greater_than_or_equal_to: 0 }
 
-  validates :owner, presence: true
+  validates :owner_id, presence: true
+
+  validate :check_start_date
+
+  def check_start_date
+    if start_date < Date.today
+      errors.add(:start_date, "Start date must be in future")
+    end
+  end
 end
