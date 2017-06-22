@@ -21,8 +21,12 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test 'project goal must be a positive number' do
+    owner = new_user
+    owner.save
     project = new_project
-
+    project.owner = owner
+    project.save
+    assert project.valid?
   end
 
   def new_project
