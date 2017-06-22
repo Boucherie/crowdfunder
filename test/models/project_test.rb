@@ -27,6 +27,7 @@ class ProjectTest < ActiveSupport::TestCase
     project.owner = owner
     project.save
     assert project.valid?
+    assert project.goal
   end
 
   def new_project
