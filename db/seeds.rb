@@ -4,14 +4,14 @@ User.destroy_all
 Project.destroy_all
 
 10.times do
-  project = Project.create!(
+  project = Project.new(
               title: Faker::App.name,
               description: Faker::Lorem.paragraph,
               goal: rand(100000),
               start_date: Time.now.utc - rand(60).days,
               end_date: Time.now.utc + rand(10).days
             )
-
+            project.save(validate: false)
   5.times do
     project.rewards.create!(
       description: Faker::Superhero.power,
