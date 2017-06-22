@@ -5,4 +5,6 @@ class Project < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
 
   validates :title, :description, :goal, :start_date, :end_date, presence: true
+
+  #validates :goal, numericality: {greater_than_or_equal_to: 0 }
 end
