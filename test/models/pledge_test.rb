@@ -15,6 +15,15 @@ class PledgeTest < ActiveSupport::TestCase
     assert pledge.persisted?
   end
 
+  test 'pledge is invalid without dollar amount' do
+    project = new_project
+    project.save
+    pledge = pledge = Pledge.new(dollar_amount: 3.00, project: project)
+    pledge.dollar_amount = nil
+    pledge.save
+    assert pledge.invalid?, 'Pledges cannot be made with a dollar amount.'
+  end
+
   test 'owner cannot back own project' do
     Project.destroy_all
     owner = new_user
@@ -27,6 +36,8 @@ class PledgeTest < ActiveSupport::TestCase
     pledge.save
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
+
+
 
   def new_project
     Project.new(
