@@ -3,6 +3,8 @@ require 'test_helper'
 class RewardTest < ActiveSupport::TestCase
 
   test 'A reward can be created' do
+    # project = build(:project)
+    # reward = build(:reward)
     project = new_project
     project.save
     reward = Reward.create(
