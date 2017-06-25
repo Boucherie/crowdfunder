@@ -7,16 +7,11 @@ class PledgeTest < ActiveSupport::TestCase
     pledge1 = build(:pledge, dollar_amount: 99.00, project: new_project)
     pledge1.user= User.new
     assert pledge1.valid?
-    
   end
 
   test 'pledge is invalid without dollar amount' do
-    project = new_project
-    project.save
-    pledge = pledge = Pledge.new(dollar_amount: 3.00, project: project)
-    pledge.dollar_amount = nil
-    pledge.save
-    assert pledge.invalid?, 'Pledges cannot be made with a dollar amount.'
+    pledge1 = build(:pledge, project: new_project)
+    assert pledge1.invalid?, 'Pledges cannot be made with a dollar amount.'
   end
 
   test 'owner cannot back own project' do
@@ -26,10 +21,8 @@ class PledgeTest < ActiveSupport::TestCase
     project = new_project
     project.owner = owner
     project.save
-    pledge = Pledge.new(dollar_amount: 3.00, project: project)
-    pledge.user = owner
-    pledge.save
-    assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
+    pledge1 = build(:pledge, dollar_amount: 3.00, project: project, user: owner)
+    assert pledge1.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
 
