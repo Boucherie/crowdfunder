@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, on: :create
 
   validates :email, uniqueness: true
+
+
+#  def password_8_plus_characters
+  # errors.add(:password,:password_confirmation,"password must have more that 8       characters") unless password.valid?
+ #end
+
 end
