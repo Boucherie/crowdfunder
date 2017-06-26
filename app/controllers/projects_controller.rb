@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
     @project.owner_id = 1
 
-    if @project.save!
+    if @project.save
       redirect_to projects_url
     else
       render :new
