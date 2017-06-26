@@ -7,6 +7,7 @@ class UserSessionsController < ApplicationController
      if @user = login(params[:email], params[:password], params[:remember_me])
       redirect_back_or_to(root_url, notice: 'Login successful')
     else
+      #byebug
       flash.now[:alert] = 'Login failed'
       render action: 'new'
     end

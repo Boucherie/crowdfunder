@@ -30,6 +30,8 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.goal
   end
 
+
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
