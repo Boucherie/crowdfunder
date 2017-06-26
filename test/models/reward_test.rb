@@ -65,7 +65,16 @@ class RewardTest < ActiveSupport::TestCase
       assert reward.dollar_amount
     end
 
-  # 
+    test 'project dollar amount cannot be negative' do
+      project = build(:project, start_date: Time.now.utc - rand(60).days, end_date: Time.now.utc + rand(10).days)
+      project.save
+      reward = build(:reward, dollar_amount: -99.00, description: 'A heartfelt', project: project)
+      reward.save
+
+      assert reward.invalid? 'Reward should be invalid with negative dollar_amount'
+      assert reward.new_record?
+    end
+  #
   # def new_project
   #   Project.new(
   #     title:       'Cool new boardgame',
