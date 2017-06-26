@@ -7,13 +7,6 @@ class RewardTest < ActiveSupport::TestCase
     project.save
     reward = build(:reward, dollar_amount: 99.00, description: 'A heartfelt thanks!', project: project)
     reward.save
-    # project = new_project
-    # project.save
-    # reward = Reward.create(
-    #   dollar_amount: 99.00,
-    #   description: 'A heartfelt thanks!',
-    #   project: project
-    # )
     assert reward.valid?
     assert reward.persisted?
   end
@@ -23,12 +16,6 @@ class RewardTest < ActiveSupport::TestCase
     project.save
     reward = build(:reward, description: 'A heartfelt thanks', project: project)
     reward.save
-    # project = new_project
-    # project.save
-    # reward = Reward.create(
-    #   description: 'A heartfelt thanks!',
-    #   project: project
-    # )
     assert reward.invalid?, 'Reward should be invalid without dollar amount'
     assert reward.new_record?, 'Reward should not save without dollar amount'
   end
@@ -38,12 +25,6 @@ class RewardTest < ActiveSupport::TestCase
     project.save
     reward = build(:reward, dollar_amount: 99.00, project: project)
     reward.save
-    # project = new_project
-    # project.save
-    # reward = Reward.create(
-    #   dollar_amount: 99.00,
-    #   project: project
-    # )
     assert reward.invalid?, 'Reward should be invalid without a description'
     assert reward.new_record?, 'Reward should not save without a description'
   end
@@ -54,13 +35,6 @@ class RewardTest < ActiveSupport::TestCase
       project.save
       reward = build(:reward, dollar_amount: 99.00, description: 'A heartfelt', project: project)
       reward.save
-      # project = new_project
-      # project.save
-      # reward = Reward.create(
-      #   dollar_amount: 99.00,
-      #   description: 'A heartfelt thanks!',
-      #   project: project
-      # )
       assert reward.valid?
       assert reward.dollar_amount
     end
@@ -74,15 +48,5 @@ class RewardTest < ActiveSupport::TestCase
       assert reward.invalid? 'Reward should be invalid with negative dollar_amount'
       assert reward.new_record?
     end
-  #
-  # def new_project
-  #   Project.new(
-  #     title:       'Cool new boardgame',
-  #     description: 'Trade sheep',
-  #     start_date:  Date.today,
-  #     end_date:    Date.today + 1.month,
-  #     goal:        50000
-  #   )
-  # end
 
 end
