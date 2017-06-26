@@ -4,14 +4,3 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', root_path %>
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prevented new account from being created:</h2>
-
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
