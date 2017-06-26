@@ -1,5 +1,5 @@
 <h1><%= @project.title %></h1>
-<h2>Project Owner: <%= "#{@owner.first_name} #{@owner.last_name}" %></h2>
+<h2>Project Owner: <%= link_to "#{@owner.first_name} #{@owner.last_name}", @owner %></h2>
 
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
@@ -15,6 +15,18 @@
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
 
 <%= form_for [@project, Pledge.new] do |f| %>
+<% if Pledge.new.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(Pledge.new.errors.count, "error") %> prevented this pledge from being added:</h2>
+
+    <ul>
+      <% Pledge.new.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
   <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
   <%= f.submit "Pledge" %>
 <% end %>

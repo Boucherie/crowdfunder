@@ -1,5 +1,17 @@
 <h1>Add a reward for <%= @project.title %></h1>
 
+<%if @reward.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@reward.errors.count, "error") %> prevented this reward from being saved:</h2>
+
+    <ul>
+      <% @reward.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for [@project, @reward] do |f| %>
   <div>
     <%= f.label :dollar_amount %>
