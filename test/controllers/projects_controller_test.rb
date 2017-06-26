@@ -2,28 +2,29 @@ require_relative '../test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
-  # test "should show homepage" do
-  #   get root_path
-  #   assert_response :success
-  #   assert_select 'h1', "Crowdfunder"
-  # end
-  #
-  #
-  # test "user can access login form" do
-  #   get login_path
-  #   assert_response :success
-  #
-  # end
-  #
-  # test "user can log in" do
-  #   user_login
-  #   assert_response :success
-  # end
-  #
+  test "should show homepage" do
+    get root_path
+    assert_response :success
+    assert_select 'h1', "Crowdfunder"
+  end
+
+
+  test "user can access login form" do
+    get login_path
+    assert_response :success
+
+  end
+
+  test "user can log in" do
+    user_login
+    assert_response :redirect
+  end
+
   def user_login
     user = build(:user, email: "bettymaker@gmail.com", password: "123456789", password_confirmation: "123456789")
     user.save!
-    post "/user_sessions", params: {email: user.email, password: "123456789"}
+    @user = user
+    post user_sessions_path, params: {email: user.email, password: "123456789"}
   end
 
 
@@ -34,17 +35,16 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create new project" do
-    user_login
-
+   user_login
     project1 = {
       title:       'Cool new boardgame',
       description: 'Trade sheep',
       start_date:  Date.today,
       end_date:    Date.today + 1.month,
       goal:        50000
-    }
-    post "/projects", params: project1
-  end
+     }
+     post "/projects", params: {project:  project1}
+   end
 end
 
 
