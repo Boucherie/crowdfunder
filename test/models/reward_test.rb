@@ -3,15 +3,17 @@ require 'test_helper'
 class RewardTest < ActiveSupport::TestCase
 
   test 'A reward can be created' do
-    # project = build(:project)
-    # reward = build(:reward)
-    project = new_project
+    project = build(:project, start_date: Time.now.utc - rand(60).days, end_date: Time.now.utc + rand(10).days)
     project.save
-    reward = Reward.create(
-      dollar_amount: 99.00,
-      description: 'A heartfelt thanks!',
-      project: project
-    )
+    reward = build(:reward, dollar_amount: 99.00, description: 'A heartfelt thanks!', project: project)
+    reward.save
+    # project = new_project
+    # project.save
+    # reward = Reward.create(
+    #   dollar_amount: 99.00,
+    #   description: 'A heartfelt thanks!',
+    #   project: project
+    # )
     assert reward.valid?
     assert reward.persisted?
   end
