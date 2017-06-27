@@ -15,6 +15,14 @@ class PledgesController < ApplicationController
     end
   end
 
+def show
+    @project = Project.find(params[:project_id])
+    @pledges = @project.pledges
+    @total_pledge = @pledges.sum(:dollar_amount)
+    @pledge = @project.pledges.build(pledge_params)
+end
+
+
   private
 
   def pledge_params

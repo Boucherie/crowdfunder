@@ -1,4 +1,4 @@
-<h1><%= @project.title %></h1>
+<h1>Project Title: <%= @project.title %></h1>
 <h2>Project Owner: <%= link_to "#{@owner.first_name} #{@owner.last_name}", @owner %></h2>
 
 <% if @project.image.present? %>
@@ -30,6 +30,15 @@
   <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
   <%= f.submit "Pledge" %>
 <% end %>
+
+
+<h2>Pledges</h2>
+<% total_pledge = 0 %>
+<% @project.pledges.each do |pledge| %>
+  <p><%= number_to_currency(pledge.dollar_amount) %></p>
+  <p>Total: <%= total_pledge += pledge.dollar_amount %></p>
+<% end %>
+
 
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
