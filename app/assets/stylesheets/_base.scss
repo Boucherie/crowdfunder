@@ -8,17 +8,23 @@ html {
   box-sizing: border-box;
 }
 
+
+
 header {
-  background-color: #676767
+  background-color: cornflowerblue;
+  padding: 1em;
 }
 main {
   width: 60%;
   margin: 0 auto;
+
 }
+
+
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 30px;
+  border-radius: 50px;
 }
 
 figure {
